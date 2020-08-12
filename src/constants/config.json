@@ -1,0 +1,11 @@
+{
+  "prod": {
+    "ROOT_URL": "http://localhost:8081"
+  },
+  "staging": {
+    "ROOT_URL": "http://localhost:8081"
+  },
+  "common": {
+    "ROOT_URL": "http://localhost:8081"
+  }
+}
