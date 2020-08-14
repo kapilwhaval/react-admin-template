@@ -1,15 +1,15 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import SideDrawerWithHeader from '../components/side-drawer';
-import { Dashboard, AccessDenied, RoleMgt } from '../screens';
+import { User, RoleMgt, AccessDenied } from '../screens';
 import { useSelector } from 'react-redux';
 
 
 export default () => {
 
     const routes = [
-        { id: 1, component: <RoleMgt />, url: "/role-management" },
-        { id: 2, component: <Dashboard />, url: "/dashboard" }
+        { id: 2, component: (props) => <User access={props} />, url: "/users" },
+        { id: 3, component: (props) => <RoleMgt access={props} />, url: "/role-management" }
     ]
 
     const { user } = useSelector(state => state.userDetails);
@@ -19,12 +19,9 @@ export default () => {
             <Route path="/" component={SideDrawerWithHeader} />
             {
                 routes.map((route, index) => {
-                    let isAllowed = false;
-                    user.access_modules.map(({ id }) => { 
-                        if (id === route.id) isAllowed = true;
-                        return null;
-                    })
-                    return <Route key={index} exact path={route.url} render={isAllowed ? () => route.component : () => <AccessDenied />} />
+                    let accessProperties = "";
+                    user.access_modules.map((module) => { if (module.id === route.id) accessProperties = module; })
+                    return <Route key={index} exact path={route.url} render={accessProperties.read ? () => route.component(accessProperties) : () => <AccessDenied />} />
                 })
             }
         </>

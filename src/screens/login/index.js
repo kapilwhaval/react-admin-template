@@ -280,11 +280,12 @@ export default ({ history }) => {
             user: {
                 email: "admin@gmail.com",
                 access_modules: [
-                    { id: 1 },
+                    { id: 2, read: true, write: true, delete: true },
+                    { id: 3, read: true, write: true, delete: true },
                 ],
                 all_modules: [
-                    { id: 1, title: "Role Management", url: "/role-management" },
-                    { id: 2, title: "Dashboard", url: "/dashboard" }
+                    { id: 2, title: "Users", url: "/users" },
+                    { id: 3, title: "Role Management", url: "/role-management" }
                 ]
             }
         }
@@ -295,7 +296,7 @@ export default ({ history }) => {
             return item;
         })
         dispatch(addUser(demoResponse.user))
-        history.push("/dashboard");
+        history.push("/users");
         // login(formik.values)
         //     .then((res) => {
         //         res.user.all_modules.filter((item) => {

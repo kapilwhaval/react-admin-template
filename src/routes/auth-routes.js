@@ -6,6 +6,5 @@ export default () => (
     <>
         <Route exact path="/" render={() => <Redirect to="/login" />} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/sign-up" component={SignUp} />
     </>
 );

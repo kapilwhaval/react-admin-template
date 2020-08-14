@@ -23,7 +23,7 @@ export default ({ access }) => {
     useEffect(() => {
         getAllRoles().then((res) => { setRoles(res.data); setLoading(false) }).catch((err) => setLoading(false))
         getAllModules().then((res) => {
-            let sortedModules = res.sort((a, b) => a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1)
+            let sortedModules = res.data.sort((a, b) => a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1)
             setModules(sortedModules)
         }).catch((err) => console.log(err))
     }, []);
@@ -74,7 +74,7 @@ export default ({ access }) => {
                             name="read"
                             inputProps={{ 'aria-label': 'secondary checkbox' }}
                         />,
-                        write: <Switch
+                        write: item.id === 1 ? null : <Switch
                             disabled={item.isSelected ? !item.isSelected : true}
                             checked={item.write}
                             onChange={(event) => {
@@ -86,7 +86,7 @@ export default ({ access }) => {
                             name="write"
                             inputProps={{ 'aria-label': 'secondary checkbox' }}
                         />,
-                        delete: <Switch
+                        delete: item.id === 1 ? null : <Switch
                             disabled={item.isSelected ? !item.isSelected : true}
                             checked={item.delete}
                             onChange={(event) => {
@@ -255,7 +255,7 @@ export default ({ access }) => {
     return (
         <React.Fragment>
             <PageHeader
-                title={"Roles Management"}
+                title={"User Management"}
                 isWrite={access.write}
                 isDelete={access.delete}
                 deleteDisable={!numberOfSelectedRoles.length}
@@ -291,7 +291,7 @@ export default ({ access }) => {
                 size="lg"
                 isOpen={isPopUpOpen.isOpen}
                 toggle={() => setPopUpOpen({ ...isPopUpOpen, isOpen: false })}
-                header={isPopUpOpen.type === "add" ? "Add Role" : "Edit Role"}
+                header={isPopUpOpen.type === "add" ? "Add User" : "Edit User"}
                 footer={[
                     <Button className="mr-3" key={0} variant="contained" color="primary" onClick={() => initAddEditRole()}>Save</Button>,
                     <Button key={1} variant="contained" color="secondary" onClick={() => setPopUpOpen({ ...isPopUpOpen, isOpen: false })}>Close</Button>
