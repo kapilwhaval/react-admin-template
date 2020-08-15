@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import SideDrawerWithHeader from '../components/side-drawer';
 import { User, RoleMgt, AccessDenied } from '../screens';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUserRole } from '../api';
+import { setAccess } from '../redux/actions/user';
 
 
 export default () => {
@@ -11,8 +13,17 @@ export default () => {
         { id: 1, component: (props) => <User access={props} />, url: "/users" },
         { id: 2, component: (props) => <RoleMgt access={props} />, url: "/role-management" }
     ]
+    const dispatch = useDispatch()
+    const { access_modules, all_modules, user } = useSelector(state => state.userDetails);
 
-    const { access_modules, all_modules } = useSelector(state => state.userDetails);
+    useEffect(() => {
+        let interval = setInterval(() => {
+            getUserRole(user._id)
+                .then((res) => dispatch(setAccess(res.roles.access_modules)))
+                .catch((err) => console.log(err))
+        }, 10000);
+        return () => clearInterval(interval);
+    }, [])
 
     return (
         <>

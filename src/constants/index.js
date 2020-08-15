@@ -66,6 +66,7 @@ export default {
         SIGNUP: "/api-v1/sign-up",
         LOGIN: "/api-v1/login",
         GET_ALL_ROLES: "/api-v1/roles",
+        GET_ROLE: "/api-v1/get-role",
         CREATE_ROLE: "/api-v1/create-role",
         EDIT_ROLE: "/api-v1/edit-role",
         GET_ALL_MODULES: "/api-v1/modules",

@@ -68,3 +68,9 @@ export const deleteUsers = (ids) => {
         .then((res) => { return res.data })
         .catch((err) => { throw err; });
 }
+
+export const getUserRole = (user_id) => {
+    return api('get', `${constants.API.GET_ROLE}/${user_id}`,)
+        .then((res) => { return res.data })
+        .catch((err) => { throw err; });
+}

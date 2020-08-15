@@ -4,7 +4,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
 import { useStyles } from './styles';
 
-export default ({ title, onAdd, onDelete }) => {
+export default ({ title, onAdd, onDelete, deleteDisable, isWrite, isDelete }) => {
 
     const classes = useStyles();
 
@@ -16,8 +16,8 @@ export default ({ title, onAdd, onDelete }) => {
                 </Typography>
             </div>
             <div style={{ width: "100%", display: "flex", justifyContent: "flex-end", marginTop: "5px" }}>
-                <Button startIcon={<AddIcon />} onClick={() => onAdd()} variant="contained" className={classes.primaryButton}>Add</Button>
-                <Button startIcon={<DeleteIcon />} onClick={() => onDelete()} variant="contained" className={classes.dangerButton}>Delete</Button>
+                {isWrite ? <Button startIcon={<AddIcon />} onClick={() => onAdd()} variant="contained" className={classes.primaryButton}>Add</Button> : null}
+                {isDelete ? <Button disabled={deleteDisable} startIcon={<DeleteIcon />} onClick={() => onDelete()} variant="contained" className={classes.dangerButton}>Delete</Button> : null}
             </div>
         </Container>
     );

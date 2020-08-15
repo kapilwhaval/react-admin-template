@@ -11,6 +11,7 @@ import swal from 'sweetalert';
 
 export default ({ access }) => {
 
+    console.log(access)
     const classes = useStyles();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
