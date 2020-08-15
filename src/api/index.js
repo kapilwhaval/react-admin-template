@@ -3,7 +3,7 @@ import { getConfig } from "../constants/config-handler";
 import constants from '../constants';
 
 const api = (method, url, data) => {
-    let config = { 'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMmZmYzZmZjc2YTYwMjNmNDhhOTUyNCIsImlhdCI6MTU5NzQyMjU5N30.LAdVyRJnR7AnhiWCxmAlE2s9xXNM7M57DcH5ZJzrQx0' }
+    let config = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMmZmYzZmZjc2YTYwMjNmNDhhOTUyNCIsImlhdCI6MTU5NzQyMjU5N30.LAdVyRJnR7AnhiWCxmAlE2s9xXNM7M57DcH5ZJzrQx0' }
     return axios({ method: method, url: `${getConfig().ROOT_URL}${url}`, headers: config, data: data, })
         .then((res) => { return res; })
         .catch((err) => { throw err; });
@@ -34,7 +34,7 @@ export const getAllModules = () => {
 }
 
 export const deleteRoles = (ids) => {
-    return api('post', constants.API.DELETE_ROLES, ids)
+    return api('delete', constants.API.DELETE_ROLES, ids)
         .then((res) => { return res.data })
         .catch((err) => { throw err; });
 }

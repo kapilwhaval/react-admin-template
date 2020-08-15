@@ -20,7 +20,7 @@ export default () => {
             {
                 routes.map((route, index) => {
                     let accessProperties = "";
-                    user.access_modules.map((module) => { if (module.id === route.id) accessProperties = module; })
+                    user.access_modules.map((module) => { if (module.id === route.id) accessProperties = module; return null; })
                     return <Route key={index} exact path={route.url} render={accessProperties.read ? () => route.component(accessProperties) : () => <AccessDenied />} />
                 })
             }

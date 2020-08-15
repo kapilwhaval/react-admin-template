@@ -1,5 +1,5 @@
 import React from 'react';
-import { Login, SignUp } from '../screens';
+import { Login } from '../screens';
 import { Route, Redirect } from 'react-router-dom';
 
 export default () => (

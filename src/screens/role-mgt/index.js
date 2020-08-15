@@ -21,15 +21,15 @@ export default ({ access }) => {
     const [isPopUpOpen, setPopUpOpen] = useState({ type: 'add', isOpen: false });
 
     useEffect(() => {
-        getAllRoles().then((res) => { setRoles(res.data); setLoading(false) }).catch((err) => setLoading(false))
+        getAllRoles().then((res) => { setRoles(res.roles); setLoading(false) }).catch((err) => setLoading(false))
         getAllModules().then((res) => {
             let sortedModules = res.sort((a, b) => a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1)
             setModules(sortedModules)
         }).catch((err) => console.log(err))
     }, []);
 
-    const numberOfSelectedRoles = roles.filter((role) => { if (role.isSelected) return role })
-    const numberOfSelectedModules = modules.filter((module) => { if (module.isSelected) return module });
+    const numberOfSelectedRoles = roles.filter((role) => { return role.isSelected ? role : null })
+    const numberOfSelectedModules = modules.filter((module) => { return module.isSelected ? module : null });
 
     const renderModules = () => {
         const modulesColumns = [
@@ -130,13 +130,11 @@ export default ({ access }) => {
         })
             .then((isConfirmed) => {
                 if (isConfirmed) {
-                    let selectedRoles = roles.filter((role) => { if (role.isSelected) return role });
-                    let selectedIds = selectedRoles.map((item) => { return item.id })
+                    let selectedRoles = roles.filter((role) => { return role.isSelected ? role : null });
+                    let selectedIds = selectedRoles.map((item) => { return item._id })
                     deleteRoles({ ids: selectedIds })
                         .then(() => {
-                            setRoles(roles.filter((role) => {
-                                if (selectedIds.indexOf(role.id) === -1) return role
-                            }))
+                            setRoles(roles.filter((role) => { return selectedIds.indexOf(role._id) === -1 ? role : null }))
                             swal({
                                 title: "Success",
                                 text: "Role(s) Deleted Successfully",
@@ -159,7 +157,7 @@ export default ({ access }) => {
 
     const initEditRole = (role) => {
         setSelectedModules(modules.filter((module) => {
-            return role.module.map((roleModules) => {
+            return role.access_modules.map((roleModules) => {
                 if (roleModules.id === module.id) {
                     module.isSelected = true
                     module.read = roleModules.read;
@@ -172,21 +170,21 @@ export default ({ access }) => {
     }
 
     const initAddEditRole = () => {
-        let updatedModules = modules.filter((module) => { if (module.isSelected) { return module; } });
+        let updatedModules = modules.filter((module) => { return module.isSelected ? module : null });
         let selectedIds = updatedModules.map((item) => {
             return {
                 id: item.id,
-                read: item.read,
-                write: item.write,
-                delete: item.delete
+                read: item.read ? item.read : "ss",
+                write: item.write ? item.write : false,
+                delete: item.delete ? item.delete : false
             }
         })
         if (role.name && role.description && selectedIds.length) {
             setError("");
             if (isPopUpOpen.type === "add") {
-                addRole({ name: role.name, description: role.description, module: selectedIds })
+                addRole({ name: role.name, description: role.description, access_modules: selectedIds })
                     .then(async (res) => {
-                        setRoles([...roles, res.data]) //update table after adding role
+                        setRoles([...roles, res.role]) //update table after adding role
                         return await swal({
                             title: "Success",
                             text: "Added Role successfully",
@@ -204,9 +202,9 @@ export default ({ access }) => {
                         button: "OK",
                     }))
             } else {
-                editRole({ id: role.id, name: role.name, description: role.description, module: selectedIds })
+                editRole({ _id: role._id, name: role.name, description: role.description, access_modules: selectedIds })
                     .then(async (res) => {
-                        setRoles(roles.map((item) => item.id === res.data.id ? res.data : item))  //update table after editing role
+                        setRoles(roles.map((item) => item._id === res.data._id ? res.data : item))  //update table after editing role
                         return await swal({
                             title: "Success",
                             text: "Edited role successfully",
@@ -272,12 +270,12 @@ export default ({ access }) => {
                             return {
                                 select: <Checkbox onClick={(event) => {
                                     setRoles(roles.filter((role) => {
-                                        if (role.id === item.id) role.isSelected = event.target.checked
+                                        if (role._id === item._id) role.isSelected = event.target.checked
                                         return role;
                                     }))
                                 }} checked={item.isSelected ? item.isSelected : false} color="primary" />,
                                 name: item.name,
-                                module: item.module ? item.module.length : '0',
+                                module: item.access_modules ? item.access_modules.length : '0',
                                 edit: access.write ? <Button variant="contained" className={classes.primaryButton} onClick={() => {
                                     setRole(item);
                                     initEditRole(item);

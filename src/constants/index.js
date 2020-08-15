@@ -64,11 +64,11 @@ export default {
     API: {
         SIGNUP: "/api-v1/signup",
         LOGIN: "/api-v1/login",
-        GET_ALL_ROLES: "/api-v1/role",
-        CREATE_ROLE: "/api-v1/role",
+        GET_ALL_ROLES: "/api-v1/roles",
+        CREATE_ROLE: "/api-v1/create-role",
         EDIT_ROLE: "/api-v1/role",
         GET_ALL_MODULES: "/api-v1/modules",
-        DELETE_ROLES: "/api-v1/roleDelete"
+        DELETE_ROLES: "/api-v1/delete-roles"
     },
     IMAGE_FORMATE_REGEX: /(\.jpg|\.jpeg|\.bmp|\.png)$/i,
     GET_YEARS: () => {
