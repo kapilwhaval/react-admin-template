@@ -46,7 +46,7 @@ export const addRole = (role) => {
 }
 
 export const editRole = (data) => {
-    return api('put', `${constants.API.EDIT_ROLE}/${data.id}`, data)
+    return api('put', `${constants.API.EDIT_ROLE}`, data)
         .then((res) => { return res.data })
         .catch((err) => { throw err; });
 }

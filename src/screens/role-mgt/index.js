@@ -204,7 +204,7 @@ export default ({ access }) => {
             } else {
                 editRole({ _id: role._id, name: role.name, description: role.description, access_modules: selectedIds })
                     .then(async (res) => {
-                        setRoles(roles.map((item) => item._id === res.data._id ? res.data : item))  //update table after editing role
+                        setRoles(roles.map((item) => item._id === res.role._id ? res.role : item))  //update table after editing role
                         return await swal({
                             title: "Success",
                             text: "Edited role successfully",
