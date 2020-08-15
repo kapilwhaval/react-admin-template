@@ -12,7 +12,7 @@ import Header from '../header';
 
 export default ({ history }) => {
 
-    const { user } = useSelector(state => state.userDetails);
+    const { all_modules } = useSelector(state => state.userDetails);
     const classes = useStyles();
     const [isDrawerOpen, setDrawerOpen] = useState(false);
 
@@ -24,7 +24,7 @@ export default ({ history }) => {
             onKeyDown={() => setDrawerOpen(!isDrawerOpen)}
         >
             <List>
-                {user.all_modules.map((menu) => menu.isAllowed ? (
+                {all_modules.map((menu) => menu.isAllowed ? (
                     <ListItem button key={menu.title} onClick={() => history.push(menu.url)}>
                         <ListItemIcon className={classes.icon}>{<Icons.RadioButtonChecked />}</ListItemIcon>
                         <ListItemText primary={menu.title.charAt(0).toUpperCase() + menu.title.slice(1)} className={classes.label} />

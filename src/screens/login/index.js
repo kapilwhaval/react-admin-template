@@ -275,40 +275,18 @@ export default ({ history }) => {
     })
 
     const onSubmit = () => {
-        let demoResponse = {
-            role: "admin",
-            user: {
-                email: "admin@gmail.com",
-                access_modules: [
-                    { id: 2, read: true, write: true, delete: true },
-                    { id: 3, read: true, write: true, delete: true },
-                ],
-                all_modules: [
-                    { id: 2, title: "Users", url: "/users" },
-                    { id: 3, title: "Role Management", url: "/role-management" }
-                ]
-            }
-        }
-        demoResponse.user.all_modules.filter((item) => {
-            let isAllowed = false;
-            demoResponse.user.access_modules.map(({ id }) => { if (id === item.id) isAllowed = true })
-            item.isAllowed = isAllowed;
-            return item;
-        })
-        dispatch(addUser(demoResponse.user))
-        history.push("/users");
-        // login(formik.values)
-        //     .then((res) => {
-        //         res.user.all_modules.filter((item) => {
-        //             let isAllowed = false;
-        //             res.user.access_modules.map(({ id }) => { if (id === item.id) isAllowed = true })
-        //             item.isAllowed = isAllowed;
-        //             return item;
-        //         })
-        //         dispatch(addUser(res.user))
-        //         history.push("/dashboard");
-        //     })
-        //     .catch((err) => setError('Invalid Email id or password'))
+        login(formik.values)
+            .then((res) => {
+                res.all_modules.filter((item) => {
+                    let isAllowed = false;
+                    res.access_modules.map(({ id }) => { if (id === item.id) isAllowed = true })
+                    item.isAllowed = isAllowed;
+                    return item;
+                })
+                dispatch(addUser(res))
+                history.push("/dashboard");
+            })
+            .catch((err) => setError('Invalid Email id or password'))
     }
 
     const formik = useFormik({

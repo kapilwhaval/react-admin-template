@@ -131,7 +131,7 @@ export default ({ access }) => {
                     editUser(updatedUser)
                         .then((res) => {
                             setUsers(users.filter((oldUser) => {
-                                return oldUser._id === user._id ? oldUser.role = e.target.value.name : null
+                                return oldUser._id === user._id ? oldUser.role = e.target.value.name : oldUser
                             }));
                             swal({
                                 title: "Success",

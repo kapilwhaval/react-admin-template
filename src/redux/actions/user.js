@@ -1,8 +1,8 @@
 import { LOGIN, LOGOUT } from './constants';
 
-export const addUser = (userData) => {
+export const addUser = (accessData) => {
     return (dispatch) => {
-        return dispatch({ type: LOGIN, data: userData });
+        dispatch({ type: LOGIN, data: accessData });
     }
 };
 
