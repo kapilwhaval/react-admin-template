@@ -50,3 +50,9 @@ export const editRole = (data) => {
         .then((res) => { return res.data })
         .catch((err) => { throw err; });
 }
+
+export const getAllUsers = () => {
+    return api('get', `${constants.API.GET_USERS}`)
+        .then((res) => { return res.data })
+        .catch((err) => { throw err; });
+}

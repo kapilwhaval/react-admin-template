@@ -5,6 +5,6 @@ export default ({ size, isOpen, toggle, header, footer, children }) => (
     <Modal size={size} isOpen={isOpen} toggle={toggle}>
         <ModalHeader toggle={toggle}>{header}</ModalHeader>
         <ModalBody>{children}</ModalBody>
-        <ModalFooter>{footer}</ModalFooter>
+        {footer ? <ModalFooter>{footer}</ModalFooter> : null}
     </Modal>
 )

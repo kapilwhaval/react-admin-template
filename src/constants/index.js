@@ -50,6 +50,7 @@ export default {
         // eslint-disable-next-line
         MOBILE: /^(0|[1-9][0-9]{9})$/i,
         IMAGE: /(\.jpg|\.jpeg|\.bmp|\.png)$/i,
+        PHONE: /\+?\d[\d -]{8,12}\d/,
         ALPHA_NUMERIC: /^[a-z ][a-z0-9 ]+$/i,
         DATE: /\d{2}\/\d{2}\/\d{4}/,
         TASK_ID: /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i,
@@ -68,7 +69,8 @@ export default {
         CREATE_ROLE: "/api-v1/create-role",
         EDIT_ROLE: "/api-v1/edit-role",
         GET_ALL_MODULES: "/api-v1/modules",
-        DELETE_ROLES: "/api-v1/delete-roles"
+        DELETE_ROLES: "/api-v1/delete-roles",
+        GET_USERS: "/api-v1/users"
     },
     IMAGE_FORMATE_REGEX: /(\.jpg|\.jpeg|\.bmp|\.png)$/i,
     GET_YEARS: () => {
