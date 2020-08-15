@@ -1,9 +1,10 @@
 import React from 'react';
 import { TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
 
-export const InputField = ({ label, value, onChange, maxLength, id, error }) => (
+export const InputField = ({ label, value, onChange, maxLength, id, error, secured }) => (
     <TextField
         fullWidth
+        type={secured ? "password" : "text"}
         inputProps={{ maxLength: maxLength }}
         variant="outlined"
         id={id}
@@ -18,8 +19,8 @@ export const InputField = ({ label, value, onChange, maxLength, id, error }) => 
     />
 )
 
-export const DropDown = ({ label, value, onChange, id, list, error }) => (
-    <FormControl className="my-2" fullWidth variant="outlined">
+export const DropDown = ({ label, value, onChange, id, list, error, size }) => (
+    <FormControl size={size} className="my-2" fullWidth variant="outlined">
         <InputLabel id={`label${id}`}>{label}</InputLabel>
         <Select
             labelId={`label${id}`}

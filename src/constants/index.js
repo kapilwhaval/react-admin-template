@@ -63,14 +63,16 @@ export default {
             '(\\#[-a-z\\d_]*)?$', 'i') // fragment locator
     },
     API: {
-        SIGNUP: "/api-v1/signup",
+        SIGNUP: "/api-v1/sign-up",
         LOGIN: "/api-v1/login",
         GET_ALL_ROLES: "/api-v1/roles",
         CREATE_ROLE: "/api-v1/create-role",
         EDIT_ROLE: "/api-v1/edit-role",
         GET_ALL_MODULES: "/api-v1/modules",
         DELETE_ROLES: "/api-v1/delete-roles",
-        GET_USERS: "/api-v1/users"
+        GET_USERS: "/api-v1/users",
+        DELETE_USERS: "/api-v1/delete-users",
+        EDIT_USER: "/api-v1/edit-user"
     },
     IMAGE_FORMATE_REGEX: /(\.jpg|\.jpeg|\.bmp|\.png)$/i,
     GET_YEARS: () => {

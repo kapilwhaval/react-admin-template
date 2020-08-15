@@ -51,8 +51,20 @@ export const editRole = (data) => {
         .catch((err) => { throw err; });
 }
 
+export const editUser = (data) => {
+    return api('put', `${constants.API.EDIT_USER}`, data)
+        .then((res) => { return res.data })
+        .catch((err) => { throw err; });
+}
+
 export const getAllUsers = () => {
     return api('get', `${constants.API.GET_USERS}`)
+        .then((res) => { return res.data })
+        .catch((err) => { throw err; });
+}
+
+export const deleteUsers = (ids) => {
+    return api('delete', constants.API.DELETE_USERS, ids)
         .then((res) => { return res.data })
         .catch((err) => { throw err; });
 }
