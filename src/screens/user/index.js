@@ -100,7 +100,7 @@ export default ({ access }) => {
                 setUsers([...users, res.user]) //update table after adding user
                 return await swal({
                     title: "Success",
-                    text: "Added Role successfully",
+                    text: "Added User successfully",
                     icon: "success",
                     button: "OK",
                 })
