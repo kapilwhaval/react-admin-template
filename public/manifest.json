@@ -4,7 +4,7 @@
   "description": "A website for dealing with products",
   "icons": [
     {
-      "src": "images/logo192.png",
+      "src": "logo192.png",
       "sizes": "192x192",
       "type": "image/png"
     }
